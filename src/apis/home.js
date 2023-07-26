@@ -1,9 +1,14 @@
 import httpInstance from "@/utils/http";
 
-// 获取banner
-export const getBannerAPI = () => {
+// 获取banner轮播图
+export const getBannerAPI = (params = {}) => {
+  // 默认为1 商品为2
+  const { distributionSite = "1" } = params;
   return httpInstance({
     url: "/home/banner",
+    params: {
+      distributionSite,
+    },
   });
 };
 
