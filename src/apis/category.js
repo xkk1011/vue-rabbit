@@ -29,10 +29,10 @@ export const getCategoryFilterAPI = (id) => {
    } 
  * @return {*}
  */
-   export const getSubCategoryAPI = (data) => {
-    return httpInstance({
-      url:'/category/goods/temporary',
-      method:'POST',
-      data
-    })
-  }
+export const getSubCategoryAPI = (data) => {
+  return httpInstance({
+    url: "/category/goods/temporary",
+    method: "POST",
+    data,
+  });
+};
