@@ -2,8 +2,9 @@
 import { getDetail } from "@/apis/detail";
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
-import DetailHot from './components/DetailHot.vue'
-import ImageView from '@/components/ImageView/index.vue'
+import DetailHot from "./components/DetailHot.vue";
+import ImageView from "@/components/ImageView/index.vue";
+import XtxSku from "@/components/XtxSku/index.vue";
 
 const goods = ref({});
 const route = useRoute();
@@ -12,6 +13,11 @@ const getGoods = async () => {
   goods.value = res.result;
 };
 onMounted(() => getGoods());
+
+// sku规格被操作时
+const skuChange = (sku) => {
+  console.log(sku);
+};
 </script>
 
 <template>
@@ -50,7 +56,7 @@ onMounted(() => getGoods());
           <div class="goods-info">
             <div class="media">
               <!-- 图片预览区 -->
-              <ImageView :image-list="goods.mainPictures"/>
+              <ImageView :image-list="goods.mainPictures" />
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
@@ -99,7 +105,7 @@ onMounted(() => getGoods());
                 </dl>
               </div>
               <!-- sku组件 -->
-
+              <XtxSku :goods="goods" @change="skuChange" />
               <!-- 数据组件 -->
 
               <!-- 按钮组件 -->
@@ -118,22 +124,30 @@ onMounted(() => getGoods());
                 <div class="goods-detail">
                   <!-- 属性 -->
                   <ul class="attrs">
-                    <li v-for="item in goods.details.properties" :key="item.value">
+                    <li
+                      v-for="item in goods.details.properties"
+                      :key="item.value"
+                    >
                       <span class="dt">{{ item.name }}</span>
                       <span class="dd">{{ item.value }}</span>
                     </li>
                   </ul>
                   <!-- 图片 -->
-                  <img v-for="img in goods.details.pictures" :src="img" :key="img" alt="">
+                  <img
+                    v-for="img in goods.details.pictures"
+                    :src="img"
+                    :key="img"
+                    alt=""
+                  />
                 </div>
               </div>
             </div>
             <!-- 24热榜+专题推荐 -->
             <div class="goods-aside">
-                <!-- 24小时 -->
-                <DetailHot :hot-type="1"/>
-                <!-- 周 -->
-                <DetailHot :hot-type="2"/>
+              <!-- 24小时 -->
+              <DetailHot :hot-type="1" />
+              <!-- 周 -->
+              <DetailHot :hot-type="2" />
             </div>
           </div>
         </div>
